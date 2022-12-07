@@ -29,7 +29,7 @@ spring:
                             packages: '*'
             value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
         topic:
-            name: tbyte
+            name: rentacar
 
 management:
   endpoint:
