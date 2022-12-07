@@ -1,0 +1,58 @@
+eureka:
+    client:
+        fetchRegistry: true
+        registerWithEureka: true
+        serviceUrl:
+            defaultZone: http://localhost:9000/eureka
+    instance:
+        instance-id: ${spring.application.name}:${instanceId:${random.value}}
+        preferIpAddress: true
+server:
+    port: 0
+spring:
+    application:
+        name: invoice-service
+    datasource:
+        password: 12345
+        url: jdbc:postgresql://localhost:5432/rentacarinvoicedb
+        username: postgres
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+            javax:
+                persistence:
+                    validation:
+                        mode: none
+        show-sql: true
+    kafka:
+        consumer:
+            auto-offset-reset: earliest
+            bootstrap-servers: localhost:9092
+            group-id: invoice
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            properties:
+                spring:
+                    json:
+                        trusted:
+                            packages: '*'
+            value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+        topic:
+            name: tbyte
+
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    export:
+      prometheus:
+        enabled: true
