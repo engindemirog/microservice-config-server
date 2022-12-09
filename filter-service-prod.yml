@@ -28,8 +28,6 @@ spring:
                         trusted:
                             packages: '*'
             value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-        topic:
-            name: rentacar
 
 management:
   endpoint:
